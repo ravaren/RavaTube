@@ -10,7 +10,6 @@ from pytube import YouTube
 from pytube.exceptions import RegexMatchError
 
 import os
-import time
 
 
 kivy.require("1.9.0")
@@ -30,7 +29,7 @@ class RavaTube(App):
         self.window.add_widget(Image(source="icon.png"))
         # app name/title widget
         self.window.add_widget(Label(text="RavaTube",
-                                     color= "#9d0a2b",
+                                     color="#9d0a2b",
                                      font_size=52
                               ))
         # text label with disclaimer
@@ -48,6 +47,7 @@ class RavaTube(App):
                               # padding_y=(5),
                               size_hint=(1, 0.3),
                               )
+        # self.link.bind(on_focus=self.clear)
         self.window.add_widget(self.link)
         # button that triggers converting process
         self.button = Button(text="Save as MP3!",
@@ -63,6 +63,7 @@ class RavaTube(App):
     def convert(self, event):
         # function that creates mp3 file from yt video
         self.button.text = "Working..."
+        self.message.text = ""
         # try if the link is good
         try:
             # create yt object and then scrap only audio from it
@@ -75,10 +76,13 @@ class RavaTube(App):
             os.rename(out_audio, new_file)
             # set text boxes in app
             self.message.text = f"\"{yt.title}\" saved to your device!"
+            self.link.text = ""
             self.button.text = "Done!"
         except RegexMatchError:
             # while link is wrong show this text in button box
             self.button.text = "Invalid link. Try again."
+            self.link.text = ""
+            self.link.focus = True
 
 
 if __name__ == "__main__":
