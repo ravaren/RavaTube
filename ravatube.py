@@ -34,7 +34,7 @@ class RavaTube(App):
                                      font_size=52
                               ))
         # text label with disclaimer
-        self.window.add_widget(Label(text="Disclaimer: Piracy not allowed! Use it on your own responsible.",
+        self.window.add_widget(Label(text="WARNING: Downloading or converting videos from YouTube service is against the terms of service,\nand sometimes against the law. Use it on your own responsibility!",
                                      size_hint_y=0.6,
                                      font_size=10))
         # message box
